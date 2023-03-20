@@ -1,29 +1,42 @@
 {
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    esp32 = {
-      url = "github:knarkzel/esp32";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    esp-dev.url = "github:thiskappaisgrey/nixpkgs-esp-dev-rust";
   };
 
   outputs = {
     self,
     nixpkgs,
-    esp32,
+    esp-dev,
   }: let
-    pkgs = import nixpkgs {system = "x86_64-linux";};
-    idf-rust = esp32.packages.x86_64-linux.esp32;
+    pkgs = import nixpkgs {
+      system = "x86_64-linux";
+      overlays = [ (import "${esp-dev}/overlay.nix") ];
+    };
   in {
     devShells.x86_64-linux.default = pkgs.mkShell {
-      buildInputs = [
-        idf-rust
-        (pkgs.python39.withPackages (pypkgs: [ pypkgs.pip ]))
+      buildInputs = with pkgs; [
+        git
+        wget
+        flex
+        bison
+        gperf
+        cmake
+        ninja
+        gnumake
+        ncurses5
+        pkgconfig
+        llvm-xtensa
+        rust-xtensa
+        openocd-esp32-bin
+        gcc-xtensa-esp32-elf-bin
+        (python3.withPackages (pypkgs: [pypkgs.pip pypkgs.virtualenv]))
       ];
 
       shellHook = ''
-        export PATH="${idf-rust}/.rustup/toolchains/esp/bin:$PATH"
-        export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
+        export ESP_IDF_VERSION="v4.4"
+        export LIBCLANG_PATH="${pkgs.llvm-xtensa}/lib"
+        export LD_LIBRARY_PATH="${pkgs.lib.makeLibraryPath [ pkgs.libxml2 pkgs.zlib pkgs.stdenv.cc.cc.lib ]}"
       '';
     };
   };

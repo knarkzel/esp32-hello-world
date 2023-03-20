@@ -1,26 +1,55 @@
 {
   "nodes": {
-    "esp32": {
+    "esp-dev": {
       "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
+        "flake-utils": "flake-utils",
+        "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1679269257,
-        "narHash": "sha256-xSgpMjKKGkmxwCu2HI+yf9U83LqckgHAVDuLAgq1e9w=",
-        "owner": "knarkzel",
-        "repo": "esp32",
-        "rev": "ac1653e632fc4f3b91f4ca40ecdeca3ff558dc29",
+        "lastModified": 1677277463,
+        "narHash": "sha256-5oder+kbcpm1714OxNXQK3IZrbKnyq+wT0HYNqYwwYk=",
+        "owner": "thiskappaisgrey",
+        "repo": "nixpkgs-esp-dev-rust",
+        "rev": "663fa39290a819d1b9ce4c81d917824ec5cc5dfa",
         "type": "github"
       },
       "original": {
-        "owner": "knarkzel",
-        "repo": "esp32",
+        "owner": "thiskappaisgrey",
+        "repo": "nixpkgs-esp-dev-rust",
+        "type": "github"
+      }
+    },
+    "flake-utils": {
+      "locked": {
+        "lastModified": 1656928814,
+        "narHash": "sha256-RIFfgBuKz6Hp89yRr7+NR5tzIAbn52h8vT6vXkYjZoM=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "7e2a3b3dfd9af950a856d66b0a7d01e3c18aa249",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
         "type": "github"
       }
     },
     "nixpkgs": {
+      "locked": {
+        "lastModified": 1679198465,
+        "narHash": "sha256-VfXpHpniNWgg7pBzxb20pRX7kqn80LApPDQYTReiFCw=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "5a05160f7671434e1c833b1b01284b876e04eca4",
+        "type": "github"
+      },
+      "original": {
+        "id": "nixpkgs",
+        "ref": "nixpkgs-unstable",
+        "type": "indirect"
+      }
+    },
+    "nixpkgs_2": {
       "locked": {
         "lastModified": 1679172431,
         "narHash": "sha256-XEh5gIt5otaUbEAPUY5DILUTyWe1goAyeqQtmwaFPyI=",
@@ -38,8 +67,8 @@
     },
     "root": {
       "inputs": {
-        "esp32": "esp32",
-        "nixpkgs": "nixpkgs"
+        "esp-dev": "esp-dev",
+        "nixpkgs": "nixpkgs_2"
       }
     }
   },
