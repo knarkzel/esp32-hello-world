@@ -18,7 +18,7 @@
     devShells.x86_64-linux.default = pkgs.mkShell {
       buildInputs = [
         idf-rust
-        pkgs.python3
+        (pkgs.python39.withPackages (pypkgs: [ pypkgs.pip ]))
       ];
 
       shellHook = ''
