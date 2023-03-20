@@ -18,11 +18,10 @@
     devShells.x86_64-linux.default = pkgs.mkShell {
       buildInputs = [
         idf-rust
+        pkgs.python3
       ];
 
       shellHook = ''
-        export RUSTUP_TOOLCHAIN="esp"
-        export RUSTUP_HOME="${idf-rust}/.rustup"
         export PATH="${idf-rust}/.rustup/toolchains/esp/bin:$PATH"
         export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
       '';
